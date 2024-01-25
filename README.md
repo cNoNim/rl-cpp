@@ -84,8 +84,8 @@
 [issues-url]: https://github.com/cNoNim/rl-cpp/issues
 [license-shield]: https://img.shields.io/github/license/cNoNim/rl-cpp.svg?style=flat
 [license-url]: https://github.com/cNoNim/rl-cpp/blob/master/LICENSE
-[build-shield]: https://github.com/cNoNim/rl-cpp/actions/workflows/cmake-multi-platform.yml/badge.svg
-[build-url]: https://github.com/cNoNim/rl-cpp/actions/workflows/cmake-multi-platform.yml
+[build-shield]: https://github.com/cNoNim/rl-cpp/actions/workflows/build.yml/badge.svg
+[build-url]: https://github.com/cNoNim/rl-cpp/actions/workflows/build.yml
 [pytorch.js]: https://img.shields.io/badge/pytorch-000000?style=for-the-badge&logo=pytorch
 [pytorch-url]: https://pytorch.org/
 [miniconda-url]: https://conda.io/miniconda.html
