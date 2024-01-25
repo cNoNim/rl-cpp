@@ -5,6 +5,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![Build][build-shield]][build-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -73,16 +74,18 @@
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/cNoNim/rl-cpp.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/cNoNim/rl-cpp.svg?style=flat
 [contributors-url]: https://github.com/cNoNim/rl-cpp/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/cNoNim/rl-cpp.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/cNoNim/rl-cpp.svg?style=flat
 [forks-url]: https://github.com/cNoNim/rl-cpp/network/members
-[stars-shield]: https://img.shields.io/github/stars/cNoNim/rl-cpp.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/cNoNim/rl-cpp.svg?style=flat
 [stars-url]: https://github.com/cNoNim/rl-cpp/stargazers
-[issues-shield]: https://img.shields.io/github/issues/cNoNim/rl-cpp.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/cNoNim/rl-cpp.svg?style=flat
 [issues-url]: https://github.com/cNoNim/rl-cpp/issues
-[license-shield]: https://img.shields.io/github/license/cNoNim/rl-cpp.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/cNoNim/rl-cpp.svg?style=flat
 [license-url]: https://github.com/cNoNim/rl-cpp/blob/master/LICENSE
+[build-shield]: https://github.com/cNoNim/rl-cpp/actions/workflows/cmake-multi-platform.yml/badge.svg
+[build-url]: https://github.com/cNoNim/rl-cpp/actions/workflows/cmake-multi-platform.yml
 [pytorch.js]: https://img.shields.io/badge/pytorch-000000?style=for-the-badge&logo=pytorch
 [pytorch-url]: https://pytorch.org/
 [miniconda-url]: https://conda.io/miniconda.html
