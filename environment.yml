@@ -1,0 +1,9 @@
+name: .conda
+channels:
+  - nvidia
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - pytorch-cuda
+prefix: .conda
