@@ -44,7 +44,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        conda env update --file environment.yml --name .conda --prefix .conda
+        conda env update --file environment.yml --prefix .conda
 
     - name: Set build-output-dir
       id: strings
