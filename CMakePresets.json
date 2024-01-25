@@ -9,7 +9,7 @@
                 "PYTHON_EXECUTABLE": "$env{CONDA_PREFIX}/python.exe"
             },
             "environment": {
-                "CONDA_PREFIX": "${sourceDir}/.conda/"
+                "CONDA_PREFIX": "${sourceDir}/.conda"
             }
         }
     ],
