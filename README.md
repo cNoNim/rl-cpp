@@ -25,12 +25,6 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about">About</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
@@ -40,21 +34,14 @@
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
-## About
-
-### Built With
-
-[![PyTorch][PyTorch.js]][PyTorch-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
 
 [Miniconda][miniconda-url]
+
+[NVidia Cuda Toolkit][cuda-url]
 
 ### Building
 
@@ -86,6 +73,6 @@
 [license-url]: https://github.com/cNoNim/rl-cpp/blob/master/LICENSE
 [build-shield]: https://github.com/cNoNim/rl-cpp/actions/workflows/build.yml/badge.svg
 [build-url]: https://github.com/cNoNim/rl-cpp/actions/workflows/build.yml
-[pytorch.js]: https://img.shields.io/badge/pytorch-000000?style=for-the-badge&logo=pytorch
 [pytorch-url]: https://pytorch.org/
+[cuda-url]: https://developer.nvidia.com/cuda-toolkit
 [miniconda-url]: https://conda.io/miniconda.html
