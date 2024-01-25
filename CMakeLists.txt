@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.27)
 project(rl-cpp)
 
 list(APPEND CMAKE_PREFIX_PATH "$ENV{CONDA_PREFIX}/lib/site-packages/torch")
