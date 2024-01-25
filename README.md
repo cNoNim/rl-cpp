@@ -59,7 +59,7 @@
 
 1. Install dependencies
    ```sh
-   conda env update --file environment.yml --name .conda --prefix .conda
+   conda env update --file environment.yml --prefix .conda
    ```
 2. Configure
    ```sh
