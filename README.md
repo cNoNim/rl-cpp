@@ -41,7 +41,7 @@
 
 [Miniconda][miniconda-url]
 
-[NVidia Cuda Toolkit][cuda-url]
+[NVIDIA® CUDA® Toolkit][cuda-url]
 
 ### Building
 

@@ -37,7 +37,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: s-weigand/setup-conda@v1
+    - name: cuda-toolkit
+      uses: Jimver/cuda-toolkit@v0.2.14
+    - name: conda
+      uses: s-weigand/setup-conda@v1
       with:
         activate-conda: false
     - run: conda --version
