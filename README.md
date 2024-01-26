@@ -5,7 +5,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![Build][build-shield]][build-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -71,8 +70,6 @@
 [issues-url]: https://github.com/cNoNim/rl-cpp/issues
 [license-shield]: https://img.shields.io/github/license/cNoNim/rl-cpp.svg?style=flat
 [license-url]: https://github.com/cNoNim/rl-cpp/blob/master/LICENSE
-[build-shield]: https://github.com/cNoNim/rl-cpp/actions/workflows/build.yml/badge.svg
-[build-url]: https://github.com/cNoNim/rl-cpp/actions/workflows/build.yml
 [pytorch-url]: https://pytorch.org/
 [cuda-url]: https://developer.nvidia.com/cuda-toolkit
 [miniconda-url]: https://conda.io/miniconda.html
