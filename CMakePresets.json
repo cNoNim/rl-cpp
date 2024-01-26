@@ -5,12 +5,8 @@
             "name": "default",
             "displayName": "Default",
             "binaryDir": "${sourceDir}/build",
-            "cacheVariables": {
-                "PYTHON_EXECUTABLE": "$env{CONDA_PREFIX}/python.exe"
-            },
-            "environment": {
-                "CONDA_PREFIX": "${sourceDir}/.conda"
-            }
+            "cacheVariables": { "PYTHON_EXECUTABLE": "${sourceDir}/.conda/python" },
+            "environment": {}
         }
     ],
     "buildPresets": [

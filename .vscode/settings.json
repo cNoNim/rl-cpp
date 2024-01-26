@@ -1,0 +1,3 @@
+{
+    "cmake.cmakePath": "${workspaceFolder}/.conda/Library/bin/cmake"
+}
