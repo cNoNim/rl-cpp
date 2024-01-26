@@ -6,5 +6,6 @@ channels:
   - defaults
 dependencies:
   - cmake
+  - pytorch
   - pytorch-cuda
 prefix: .conda

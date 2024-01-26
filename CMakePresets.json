@@ -5,7 +5,9 @@
             "name": "default",
             "displayName": "Default",
             "binaryDir": "${sourceDir}/build",
-            "cacheVariables": { "PYTHON_EXECUTABLE": "${sourceDir}/.conda/python" },
+            "cacheVariables": {
+                "PYTHON_EXECUTABLE": "${sourceDir}/.conda/python"
+            },
             "environment": {}
         }
     ],
@@ -15,12 +17,12 @@
             "displayName": "Debug",
             "configurePreset": "default",
             "configuration": "Debug"
-         },
-         {
+        },
+        {
             "name": "release",
             "displayName": "Release",
             "configurePreset": "default",
             "configuration": "Release"
-         }
+        }
     ]
 }
