@@ -38,7 +38,7 @@
 
 ### Prerequisites
 
-[Miniconda][miniconda-url]
+[Micromamba][micromamba-url]
 
 [NVIDIA® CUDA® Toolkit][cuda-url]
 
@@ -46,7 +46,7 @@
 
 1. Install dependencies
    ```sh
-   conda env update --file environment.yml --prefix .conda
+   micromamba create --file environment.yml --prefix ./.mamba
    ```
 2. Configure
    ```sh
@@ -72,4 +72,4 @@
 [license-url]: https://github.com/cNoNim/rl-cpp/blob/master/LICENSE
 [pytorch-url]: https://pytorch.org/
 [cuda-url]: https://developer.nvidia.com/cuda-toolkit
-[miniconda-url]: https://conda.io/miniconda.html
+[micromamba-url]: https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html#

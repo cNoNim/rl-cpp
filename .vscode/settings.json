@@ -1,3 +1,12 @@
 {
-    "cmake.cmakePath": "${workspaceFolder}/.conda/Library/bin/cmake"
+    "clangd.path": "${workspaceFolder}/.mamba/Library/bin/clangd.exe",
+    "cmake.cmakePath": "${workspaceFolder}/.mamba/Library/bin/cmake",
+    "C_Cpp.clang_format_path": "${workspaceFolder}/.mamba/Library/bin/clang-format",
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.renderWhitespace": "boundary",
+    "lldb.dereferencePointers": true,
+    "lldb.consoleMode": "commands",
+    "lldb.displayFormat": "auto",
 }

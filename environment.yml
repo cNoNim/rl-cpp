@@ -1,4 +1,4 @@
-name: .conda
+name: .mamba
 channels:
   - nvidia
   - pytorch
@@ -6,6 +6,7 @@ channels:
   - defaults
 dependencies:
   - cmake
+  - clang-tools
   - pytorch
   - pytorch-cuda
-prefix: .conda
+prefix: .mamba

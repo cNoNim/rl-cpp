@@ -4,9 +4,21 @@
         {
             "name": "default",
             "displayName": "Default",
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build",
+            "architecture": {
+                "strategy": "external",
+                "value": "x64"
+            },
+            "toolset": {
+                "strategy": "external",
+                "value": "host=x64"
+            },
             "cacheVariables": {
-                "PYTHON_EXECUTABLE": "${sourceDir}/.conda/python"
+                "CMAKE_C_COMPILER": "clang-cl",
+                "CMAKE_CXX_COMPILER": "clang-cl",
+                "PYTHON_EXECUTABLE": "${sourceDir}/.mamba/python",
+                "USE_CLANG_TIDY": "ON"
             },
             "environment": {}
         }

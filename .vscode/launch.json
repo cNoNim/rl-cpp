@@ -1,7 +1,14 @@
 {
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "name": "launch rl-cpp debug lldb",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Debug/rl-cpp.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
         {
             "name": "launch rl-cpp debug",
             "type": "cppvsdbg",
