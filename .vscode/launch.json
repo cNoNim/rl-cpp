@@ -27,7 +27,8 @@
             "program": "${workspaceFolder}/build/Debug/echo-client.exe",
             "args": [
                 "localhost",
-                "55555"
+                "55555",
+                "hello"
             ],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "CMake: build echo-client"

@@ -16,6 +16,10 @@ macro(target_copy_if_different)
                           "FILES"
                           ${ARGN})
 
+    if (DEFINED _COPY_IF_DIFFERENT_UNPARSED_ARGUMENTS)
+        message(FATAL_ERROR "Unexpected parameters: ${_COPY_IF_DIFFERENT_UNPARSED_ARGUMENTS}")
+    endif()
+
     if($<BOOL:${_COPY_IF_DIFFERENT_FILES}>)
         add_custom_command(TARGET ${_COPY_IF_DIFFERENT_TARGET} POST_BUILD
                            COMMAND ${CMAKE_COMMAND} -E copy_if_different

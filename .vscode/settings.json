@@ -17,6 +17,11 @@
         "chrono": "cpp",
         "format": "cpp",
         "thread": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "exception": "cpp",
+        "xstring": "cpp",
+        "array": "cpp",
+        "system_error": "cpp",
+        "stdexcept": "cpp"
     }
 }

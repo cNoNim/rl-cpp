@@ -42,6 +42,19 @@ struct std::formatter<T>
   }
 };
 
+template<std::derived_from<std::exception> Exception>
+struct std::formatter<Exception>
+{
+  std::formatter<std::string_view> underlying;
+
+  constexpr auto parse(std::format_parse_context &parse_ctx) { return underlying.parse(parse_ctx); }
+
+  auto format(const Exception &e, std::format_context &format_ctx) const
+  {
+    return underlying.format(e.what(), format_ctx);
+  }
+};
+
 template<typename InternetProtocol>
 struct std::formatter<asio::ip::basic_endpoint<InternetProtocol>>
 {
@@ -74,14 +87,17 @@ struct std::formatter<asio::ip::tcp>
 namespace
 {
 using asio::awaitable;
+using asio::detached;
 using asio::use_awaitable;
 using asio::ip::tcp;
 namespace this_coro = asio::this_coro;
 
 awaitable<void> echo_once(tcp::socket &socket)
 {
-  char data[128];
+  std::array<char, 128> data;
+
   auto n = co_await socket.async_read_some(asio::buffer(data), use_awaitable);
+  std::cout << std::format("got {}: {}\n", socket.remote_endpoint(), std::string_view(data.data(), n));
   co_await async_write(socket, asio::buffer(data, n), use_awaitable);
 }
 
@@ -94,22 +110,29 @@ awaitable<void> echo(tcp::socket socket)
       co_await echo_once(socket);
     }
   }
-  catch (std::exception &e)
+  catch (const std::system_error &e)
   {
-    std::cout << std::format("Exception: {}\n", e.what());
+    if (e.code() != asio::error::eof)
+    {
+      std::cout << std::format("exception: {}\n", e);
+    }
+  }
+  catch (const std::exception &e)
+  {
+    std::cout << std::format("exception: {}\n", e);
   }
 }
 
 awaitable<void> listener(asio::ip::port_type port)
 {
   auto          executor = co_await this_coro::executor;
-  tcp::acceptor acceptor(executor, {tcp::v4(), port});
-  std::cout << std::format("Listen: {}\n", acceptor.local_endpoint());
+  tcp::acceptor acceptor(executor, {tcp::v6(), port});
+  std::cout << std::format("listen: {}\n", acceptor.local_endpoint());
   for (;;)
   {
     tcp::socket socket = co_await acceptor.async_accept(use_awaitable);
-    std::cout << std::format("Accept: {}\n", socket.remote_endpoint());
-    co_spawn(executor, echo(std::move(socket)), use_awaitable);
+    std::cout << std::format("accept: {}\n", socket.remote_endpoint());
+    co_spawn(executor, echo(std::move(socket)), detached);
   }
 }
 
@@ -120,15 +143,14 @@ int main(int argc, char *argv[])
   using asio::detached;
   using asio::ip::port_type;
 
+  if (argc != 2)
+  {
+    std::cout << std::format("usage: echo_server <port>\n");
+  }
+  auto port = port_type(std::atoi(argv[1]));
+
   try
   {
-    if (argc != 2)
-    {
-      throw std::runtime_error("Usage: echo_server <port>");
-    }
-
-    auto port = port_type(std::atoi(argv[1]));
-
     asio::io_context io_context(1);
     asio::signal_set signals(io_context, SIGINT, SIGTERM);
     signals.async_wait([&](auto, auto) { io_context.stop(); });
@@ -136,10 +158,12 @@ int main(int argc, char *argv[])
     co_spawn(io_context, listener(port), detached);
 
     io_context.run();
+
+    std::cout << "stop.\n";
   }
   catch (const std::exception &e)
   {
-    std::cout << std::format("Exception: {}\n", e.what());
+    std::cout << std::format("exception: {}\n", e);
   }
 
   return 0;
