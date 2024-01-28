@@ -1,3 +1,5 @@
+#include "extensions/asio.hpp"
+
 #include <asio/awaitable.hpp>
 #include <asio/co_spawn.hpp>
 #include <asio/detached.hpp>
@@ -9,80 +11,10 @@
 #include <concepts>
 #include <csignal>
 #include <exception>
+#include <extensions/std.hpp>
 #include <format>
 #include <iostream>
 #include <string_view>
-
-template<typename T>
-concept has_to_string = requires(T v) {
-  {
-    v.to_string()
-  } -> std::convertible_to<std::string_view>;
-};
-
-namespace std
-{
-template<has_to_string T>
-std::string_view to_string(const T &v)
-{
-  return v.to_string();
-}
-} // namespace std
-
-template<has_to_string T>
-struct std::formatter<T>
-{
-  std::formatter<std::string_view> underlying;
-
-  constexpr auto parse(std::format_parse_context &parse_ctx) { return underlying.parse(parse_ctx); }
-
-  auto format(const T &obj, std::format_context &format_ctx) const
-  {
-    return underlying.format(std::to_string(obj), format_ctx);
-  }
-};
-
-template<std::derived_from<std::exception> Exception>
-struct std::formatter<Exception>
-{
-  std::formatter<std::string_view> underlying;
-
-  constexpr auto parse(std::format_parse_context &parse_ctx) { return underlying.parse(parse_ctx); }
-
-  auto format(const Exception &e, std::format_context &format_ctx) const
-  {
-    return underlying.format(e.what(), format_ctx);
-  }
-};
-
-template<typename InternetProtocol>
-struct std::formatter<asio::ip::basic_endpoint<InternetProtocol>>
-{
-  std::formatter<std::string_view> underlying;
-
-  constexpr auto parse(std::format_parse_context &parse_ctx) { return underlying.parse(parse_ctx); }
-
-  auto format(const asio::ip::basic_endpoint<InternetProtocol> &endpoint, std::format_context &format_ctx) const
-  {
-    return underlying.format(
-        std::format("{}{{{}, {}}}", endpoint.protocol(), endpoint.address(), endpoint.port()),
-        format_ctx
-    );
-  }
-};
-
-template<>
-struct std::formatter<asio::ip::tcp>
-{
-  std::formatter<std::string_view> underlying;
-
-  constexpr auto parse(std::format_parse_context &parse_ctx) { return underlying.parse(parse_ctx); }
-
-  auto format(const asio::ip::tcp &, std::format_context &format_ctx) const
-  {
-    return underlying.format("tcp", format_ctx);
-  }
-};
 
 namespace
 {

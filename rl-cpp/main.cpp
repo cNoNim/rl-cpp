@@ -183,9 +183,9 @@ protected:
     auto sin_theta = std::sin(theta);
     auto cos_theta = std::cos(theta);
 
-    auto temp      = (force + pole_mass_length * std::pow(theta_v, 2) * sin_theta) / total_mass;
+    auto temp      = (force + pole_mass_length * std::powf(theta_v, 2) * sin_theta) / total_mass;
     auto theta_acc = (gravity * sin_theta - cos_theta * temp)
-                     / (length * (4.0f / 3.0f - mass_pole * std::pow(cos_theta, 2) / total_mass));
+                     / (length * (4.0f / 3.0f - mass_pole * std::powf(cos_theta, 2) / total_mass));
     auto x_acc = temp - pole_mass_length * theta_acc * cos_theta / total_mass;
 
     x       += tau * x_v;

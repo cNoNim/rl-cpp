@@ -3,10 +3,6 @@ if(compilation_included)
 endif()
 set(compilation_included true)
 
-if (MSVC)
-  add_definitions(-D_WIN32_WINDOWS=0x0A00 -D_WINSOCK_DEPRECATED_NO_WARNINGS)
-endif()
-
 add_library(compilation_options INTERFACE)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -26,37 +22,38 @@ if (CCACHE)
 endif()
 
 if(MSVC)
-    target_compile_options(compilation_options INTERFACE /W4 "/permissive-")
+    target_compile_definitions(compilation_options INTERFACE -D_WIN32_WINDOWS=0x0A00 -D_WINSOCK_DEPRECATED_NO_WARNINGS)
+    target_compile_options(compilation_options INTERFACE /W4 /utf-8 "/permissive-")
     if(WARNING_AS_ERROR)
         target_compile_options(compilation_options INTERFACE /WX)
     endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(compilation_options
-                           INTERFACE -Wall
-                                     -Wextra
-                                     -Wshadow
-                                     -Wnon-virtual-dtor
-                                     -Wold-style-cast
-                                     -Wcast-align
-                                     -Wunused
-                                     -Woverloaded-virtual
-                                     -Wpedantic
-                                     -Wconversion
-                                     -Wsign-conversion
-                                     -Wnull-dereference
-                                     -Wdouble-promotion
-                                     -Wformat=2)
+    target_compile_options(compilation_options INTERFACE
+                           -Wall
+                           -Wextra
+                           -Wshadow
+                           -Wnon-virtual-dtor
+                           -Wold-style-cast
+                           -Wcast-align
+                           -Wunused
+                           -Woverloaded-virtual
+                           -Wpedantic
+                           -Wconversion
+                           -Wsign-conversion
+                           -Wnull-dereference
+                           -Wdouble-promotion
+                           -Wformat=2)
     if(WARNING_AS_ERROR)
         target_compile_options(compilation_options INTERFACE -Werror)
     endif()
 
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        target_compile_options(compilation_options
-                               INTERFACE -Wmisleading-indentation
-                                         -Wduplicated-cond
-                                         -Wduplicated-branches
-                                         -Wlogical-op
-                                         -Wuseless-cast)
+        target_compile_options(compilation_options INTERFACE
+                               -Wmisleading-indentation
+                               -Wduplicated-cond
+                               -Wduplicated-branches
+                               -Wlogical-op
+                               -Wuseless-cast)
     endif()
 endif()
 
@@ -73,19 +70,19 @@ endif ()
 
 if (USE_PCH)
     message("Use Address Sanitizer")
-    target_precompile_headers(compilation_options
-                              INTERFACE <algorithm>
-                                        <array>
-                                        <vector>
-                                        <string>
-                                        <utility>
-                                        <functional>
-                                        <memory>
-                                        <memory_resource>
-                                        <string_view>
-                                        <cmath>
-                                        <cstddef>
-                                        <type_traits>)
+    target_precompile_headers(compilation_options INTERFACE
+                              <algorithm>
+                              <array>
+                              <vector>
+                              <string>
+                              <utility>
+                              <functional>
+                              <memory>
+                              <memory_resource>
+                              <string_view>
+                              <cmath>
+                              <cstddef>
+                              <type_traits>)
 endif ()
 
 if(USE_ASAN)
