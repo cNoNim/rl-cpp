@@ -2,8 +2,8 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "default",
-            "displayName": "Default",
+            "name": "ninja",
+            "displayName": "Ninja",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build",
             "architecture": {
@@ -15,8 +15,18 @@
                 "value": "host=x64"
             },
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang-cl",
-                "CMAKE_CXX_COMPILER": "clang-cl",
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl",
+                "PYTHON_EXECUTABLE": "${sourceDir}/.mamba/python",
+                "USE_CLANG_TIDY": "ON"
+            },
+            "environment": {}
+        },
+        {
+            "name": "vs",
+            "displayName": "Visual Studio",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
                 "PYTHON_EXECUTABLE": "${sourceDir}/.mamba/python",
                 "USE_CLANG_TIDY": "ON"
             },
@@ -27,13 +37,13 @@
         {
             "name": "debug",
             "displayName": "Debug",
-            "configurePreset": "default",
+            "configurePreset": "vs",
             "configuration": "Debug"
         },
         {
             "name": "release",
             "displayName": "Release",
-            "configurePreset": "default",
+            "configurePreset": "vs",
             "configuration": "Release"
         }
     ]

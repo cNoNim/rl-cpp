@@ -5,6 +5,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - asio
   - cmake
   - clang-tools
   - pytorch

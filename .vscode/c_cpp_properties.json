@@ -2,12 +2,12 @@
     "version": 4,
     "env": {
         "includePath": [
-            "${workspaceFolder}/.mamba/include/"
+            "${workspaceFolder}/.mamba/Library/include/"
         ]
     },
     "configurations": [
         {
-            "name": "Win32",
+            "name": "all",
             "includePath": [
                 "${includePath}"
             ],

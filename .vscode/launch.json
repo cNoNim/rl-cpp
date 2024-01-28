@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "launch rl-cpp debug lldb",
+            "name": "rl-cpp",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/build/Debug/rl-cpp.exe",
@@ -10,14 +10,37 @@
             "cwd": "${workspaceFolder}"
         },
         {
-            "name": "launch rl-cpp debug",
-            "type": "cppvsdbg",
+            "name": "echo-server",
+            "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/Debug/rl-cpp.exe",
-            "args": [],
+            "program": "${workspaceFolder}/build/Debug/echo-server.exe",
+            "args": [
+                "55555"
+            ],
             "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false
+            "preLaunchTask": "CMake: build echo-server"
+        },
+        {
+            "name": "echo-client",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Debug/echo-client.exe",
+            "args": [
+                "localhost",
+                "55555"
+            ],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "CMake: build echo-client"
+        },
+    ],
+    "compounds": [
+        {
+            "name": "echo",
+            "configurations": [
+                "echo-server",
+                "echo-client"
+            ],
+            "stopAll": true
         }
     ]
 }

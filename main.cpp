@@ -177,9 +177,11 @@ protected:
   transition_type do_step(observation_type observation, action_type action) override
   {
     auto [x, x_v, theta, theta_v] = observation;
-    auto force                    = action == right ? force_mag : -force_mag;
-    auto sin_theta                = std::sin(theta);
-    auto cos_theta                = std::cos(theta);
+
+    auto force = action == right ? force_mag : -force_mag;
+
+    auto sin_theta = std::sin(theta);
+    auto cos_theta = std::cos(theta);
 
     auto temp      = (force + pole_mass_length * std::pow(theta_v, 2) * sin_theta) / total_mass;
     auto theta_acc = (gravity * sin_theta - cos_theta * temp)
@@ -214,6 +216,6 @@ int main()
 {
   cart_pole_environment environment;
   environment.reset();
-  auto transition = environment.step(0);
+  // auto transition = environment.step(0);
   return 0;
 }

@@ -3,6 +3,10 @@ if(compilation_included)
 endif()
 set(compilation_included true)
 
+if (MSVC)
+  add_definitions(-D_WIN32_WINDOWS=0x0A00 -D_WINSOCK_DEPRECATED_NO_WARNINGS)
+endif()
+
 add_library(compilation_options INTERFACE)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -19,7 +23,7 @@ find_program(CCACHE ccache)
 if (CCACHE)
     message("Use ccache")
     set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
-endif ()
+endif()
 
 if(MSVC)
     target_compile_options(compilation_options INTERFACE /W4 "/permissive-")
@@ -27,7 +31,7 @@ if(MSVC)
         target_compile_options(compilation_options INTERFACE /WX)
     endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(compilation_options 
+    target_compile_options(compilation_options
                            INTERFACE -Wall
                                      -Wextra
                                      -Wshadow
@@ -45,7 +49,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     if(WARNING_AS_ERROR)
         target_compile_options(compilation_options INTERFACE -Werror)
     endif()
-  
+
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         target_compile_options(compilation_options
                                INTERFACE -Wmisleading-indentation
@@ -69,7 +73,7 @@ endif ()
 
 if (USE_PCH)
     message("Use Address Sanitizer")
-    target_precompile_headers(compilation_options 
+    target_precompile_headers(compilation_options
                               INTERFACE <algorithm>
                                         <array>
                                         <vector>
