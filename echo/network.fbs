@@ -1,0 +1,11 @@
+include "message.fbs";
+
+namespace echo;
+
+table Request {
+  msg: [ubyte] (nested_flatbuffer: "echo.Message");
+}
+
+table Response  {
+  msg: [ubyte] (nested_flatbuffer: "echo.Message");
+}

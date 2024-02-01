@@ -6,6 +6,19 @@
 #include <string_view>
 
 template<typename T>
+struct static_cast_t
+{
+  template<typename S>
+  T operator()(S &&source) const
+  {
+    return static_cast<T>(std::forward<S>(source));
+  }
+};
+
+template<typename T>
+constexpr static auto static_cast_v = static_cast_t<T>();
+
+template<typename T>
 concept has_to_string = requires(T v) {
   {
     v.to_string()

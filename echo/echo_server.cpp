@@ -1,4 +1,5 @@
 #include "extensions/asio.hpp"
+#include "network_generated.h"
 
 #include <asio/awaitable.hpp>
 #include <asio/co_spawn.hpp>
@@ -8,12 +9,15 @@
 #include <asio/signal_set.hpp>
 #include <asio/use_awaitable.hpp>
 #include <asio/write.hpp>
+#include <charconv>
 #include <concepts>
 #include <csignal>
 #include <exception>
 #include <extensions/std.hpp>
 #include <format>
 #include <iostream>
+#include <ranges>
+#include <span>
 #include <string_view>
 
 namespace
@@ -24,13 +28,29 @@ using asio::use_awaitable;
 using asio::ip::tcp;
 namespace this_coro = asio::this_coro;
 
+void createResponse(flatbuffers::FlatBufferBuilder &fbb, const ::flatbuffers::Vector<uint8_t> *data)
+{
+  auto content = fbb.CreateVector(data->data(), data->size());
+  auto request = echo::CreateRequest(fbb, content);
+  fbb.Finish(request);
+}
+
 awaitable<void> echo_once(tcp::socket &socket)
 {
   std::array<char, 128> data;
 
-  auto n = co_await socket.async_read_some(asio::buffer(data), use_awaitable);
-  std::cout << std::format("got {}: {}\n", socket.remote_endpoint(), std::string_view(data.data(), n));
-  co_await async_write(socket, asio::buffer(data, n), use_awaitable);
+  co_await socket.async_read_some(asio::buffer(data), use_awaitable);
+
+  auto request = flatbuffers::GetRoot<echo::Request>(data.data());
+
+  auto message = request->msg_nested_root();
+
+  std::cout << std::format("{} got({}): {}\n", socket.remote_endpoint(), message->id(), message->str()->string_view());
+
+  flatbuffers::FlatBufferBuilder builder;
+  createResponse(builder, request->msg());
+
+  co_await async_write(socket, asio::buffer(builder.GetBufferPointer(), builder.GetSize()), use_awaitable);
 }
 
 awaitable<void> echo(tcp::socket socket)
@@ -55,10 +75,10 @@ awaitable<void> echo(tcp::socket socket)
   }
 }
 
-awaitable<void> listener(asio::ip::port_type port)
+awaitable<void> listener(const asio::ip::tcp::endpoint &endpoint)
 {
   auto          executor = co_await this_coro::executor;
-  tcp::acceptor acceptor(executor, {tcp::v6(), port});
+  tcp::acceptor acceptor(executor, endpoint);
   std::cout << std::format("listen: {}\n", acceptor.local_endpoint());
   for (;;)
   {
@@ -75,11 +95,12 @@ int main(int argc, char *argv[])
   using asio::detached;
   using asio::ip::port_type;
 
-  if (argc != 2)
+  auto args = std::span(argv, argc) | std::views::transform(static_cast_v<std::string_view>);
+
+  if (args.size() != 3)
   {
-    std::cout << std::format("usage: echo_server <port>\n");
+    std::cout << std::format("usage: echo_server <host> <port>\n");
   }
-  auto port = port_type(std::atoi(argv[1]));
 
   try
   {
@@ -87,7 +108,8 @@ int main(int argc, char *argv[])
     asio::signal_set signals(io_context, SIGINT, SIGTERM);
     signals.async_wait([&](auto, auto) { io_context.stop(); });
 
-    co_spawn(io_context, listener(port), detached);
+    asio::ip::tcp::resolver resolver(io_context);
+    co_spawn(io_context, listener(*resolver.resolve(args[1], args[2])), detached);
 
     io_context.run();
 

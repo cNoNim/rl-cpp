@@ -5,7 +5,7 @@
             "name": "rl-cpp",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/Debug/rl-cpp.exe",
+            "program": "${workspaceFolder}/build/rl-cpp/Debug/rl-cpp.exe",
             "args": [],
             "cwd": "${workspaceFolder}"
         },
@@ -13,8 +13,9 @@
             "name": "echo-server",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/Debug/echo-server.exe",
+            "program": "${workspaceFolder}/build/echo/Debug/echo-server.exe",
             "args": [
+                "localhost",
                 "55555"
             ],
             "cwd": "${workspaceFolder}",
@@ -24,7 +25,7 @@
             "name": "echo-client",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/Debug/echo-client.exe",
+            "program": "${workspaceFolder}/build/echo/Debug/echo-client.exe",
             "args": [
                 "localhost",
                 "55555",

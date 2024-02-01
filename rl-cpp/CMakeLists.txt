@@ -1,3 +1,5 @@
+set(ENV{MKLROOT} ${VIRTUAL_PREFIX}/Library/lib)
+
 find_package(Torch REQUIRED)
 
 add_executable(rl-cpp main.cpp)

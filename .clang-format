@@ -98,7 +98,7 @@ EmptyLineAfterAccessModifier: Never
 EmptyLineBeforeAccessModifier: Always
 ExperimentalAutoDetectBinPacking: false
 FixNamespaceComments: true
-IncludeBlocks:   Regroup
+IncludeBlocks:   Preserve
 IndentAccessModifiers: false
 IndentCaseBlocks: false
 IndentCaseLabels: false

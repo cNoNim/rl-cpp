@@ -1,0 +1,6 @@
+namespace echo;
+
+table Message {
+  id: uint32;
+  str: string;
+}

@@ -8,6 +8,6 @@ dependencies:
   - asio
   - cmake
   - clang-tools
-  - pytorch
-  - pytorch-cuda
+  - glad2-cmake
+  - sfml
 prefix: .mamba

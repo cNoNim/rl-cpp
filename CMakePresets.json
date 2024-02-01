@@ -17,6 +17,7 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
                 "CMAKE_CXX_COMPILER": "cl",
+                "Python_EXECUTABLE": "${sourceDir}/.mamba/python",
                 "PYTHON_EXECUTABLE": "${sourceDir}/.mamba/python",
                 "USE_CLANG_TIDY": "ON"
             },
@@ -27,6 +28,7 @@
             "displayName": "Visual Studio",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
+                "Python_EXECUTABLE": "${sourceDir}/.mamba/python",
                 "PYTHON_EXECUTABLE": "${sourceDir}/.mamba/python",
                 "USE_CLANG_TIDY": "ON"
             },
